@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { Link } from "react-router-dom";
 import './App.css'
 
 export default function App() {
   return (
-    
+    <div className="pt-16">
     <div className="min-h-dvh text-neutral-900">
       {/* ===== TOP OF THE PAGE ===== */}
       <header className="relative isolate overflow-visible">
@@ -72,7 +73,9 @@ export default function App() {
       {/* ===== GALLERY SECTION ===== */}
       <section className="mx-auto w-[92%] md:w-[85%] max-w-6xl grid md:grid-cols-2 gap-8 md:gap-12">
         <div>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4">Gallery</h2>
+          <Link to="/gallery" className="text-2xl md:text-3xl font-semibold mb-4">
+                Gallery
+          </Link>
           <p className="text-neutral-700 leading-relaxed">
             Discover the perfect blend of modern and Mediterranean comfort at Villa M, featuring
             top‑tier amenities and stylish interiors.
@@ -132,6 +135,7 @@ export default function App() {
       </footer>
 
       <div className="h-8" />
+    </div>
     </div>
   );
 }
