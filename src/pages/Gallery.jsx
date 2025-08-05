@@ -37,10 +37,10 @@ export default function Gallery() {
   return (
     <>
       <div className="pt-16">
-      <div className="pt-20 p-6 max-w-7xl mx-auto">
+      <div className="pt-20 p-2 sm:p-6 sm:max-w-7xl sm:mx-auto">
         <h1 className="text-3xl font-bold mb-6">Villa M Gallery</h1>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 w-full">
           {sortedImages.slice(0, visibleCount).map((src, i) => (
             <div
               key={i}
