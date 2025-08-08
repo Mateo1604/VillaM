@@ -34,38 +34,38 @@ export default function Gallery() {
   const showNext = () =>
     setCurrentIndex((prev) => (prev === sortedImages.length - 1 ? 0 : prev + 1));
 
-  return (
-    <>
-      <div className="pt-16">
-      <div className="pt-20 p-2 sm:p-6 sm:max-w-7xl sm:mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Villa M Gallery</h1>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 w-full">
+return (
+  <div className="pt-16 px-4 sm:px-6">  {/* 64px = just enough to clear h-14 navbar */}
+    {/* full-bleed breakout */}
+    <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-0">
+      <div className="px-4 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
           {sortedImages.slice(0, visibleCount).map((src, i) => (
-            <div
+            <button
               key={i}
-              className="overflow-hidden rounded-lg cursor-pointer group"
+              className="overflow-hidden rounded-lg cursor-pointer group block"
               onClick={() => openLightbox(i)}
             >
               <img
                 src={src}
-                alt={`Gallery image ${i + 1}`}
+                alt=""
                 loading="lazy"
-                className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
               />
-            </div>
+            </button>
           ))}
         </div>
+      </div>
+    </div>
 
-        <LightboxModal
-          images={sortedImages}
-          currentIndex={currentIndex}
-          onClose={closeLightbox}
-          onPrev={showPrev}
-          onNext={showNext}
-        />
-      </div>
-      </div>
-    </>
-  );
+    <LightboxModal
+      images={sortedImages}
+      currentIndex={currentIndex}
+      onClose={closeLightbox}
+      onPrev={showPrev}
+      onNext={showNext}
+    />
+  </div>
+);
+
 }
