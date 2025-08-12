@@ -1,4 +1,4 @@
-import * as ICAL from "ical.js";
+import * as ical from "ical.js";
 
 /**
  * Simple per-instance in-memory cache.
@@ -73,14 +73,14 @@ function setCachingHeaders(res, ttlMinutes) {
 
 // Convert ICS VEVENTs to a list of booked YYYY-MM-DD strings
 function parseIcsToBookedDates(icsText) {
-  const jcal = ICAL.parse(icsText);
-  const comp = new ICAL.Component(jcal);
+  const jcal = ical.parse(icsText);
+  const comp = new ical.Component(jcal);
   const events = comp.getAllSubcomponents("vevent") || [];
 
   const days = new Set();
 
   for (const ev of events) {
-    const ve = new ICAL.Event(ev);
+    const ve = new ical.Event(ev);
 
     // dtstart/dtend: Booking.com exports are usually all-day, dtend is exclusive
     const start = ve.startDate.toJSDate();
