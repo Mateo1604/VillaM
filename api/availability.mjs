@@ -1,5 +1,6 @@
 // api/availability.mjs
 import ICAL from "ical.js"; // <-- default import
+import manualBlocks from '../data/blocked_dates.json' assert { type: "json" };
 
 let cache = { data: null, ts: 0 };
 
@@ -30,6 +31,9 @@ export default async function handler(req, res) {
     console.log(icsText.slice(0, 500));
 
     const bookedDates = parseIcsToBookedDates(icsText);
+    const mergedBookedDates = Array.from(
+      new Set([...bookedDates, ...expandExtras(manualBlocks)])
+    ).sort();
 
     const payload = {
       bookedDates,
@@ -89,4 +93,26 @@ function toIsoLocal(d) {
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
+}
+
+function expandExtras(blocks) {
+  const allDates = [];
+
+  // Single days
+  if (blocks.days) {
+    allDates.push(...blocks.days);
+  }
+
+  // Ranges
+  if (blocks.ranges) {
+    for (const range of blocks.ranges) {
+      const start = new Date(range.start);
+      const end = new Date(range.end);
+      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        allDates.push(d.toISOString().split("T")[0]);
+      }
+    }
+  }
+
+  return allDates;
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp, FaAirbnb } from "react-icons/fa";
+import { TbBrandBooking } from 'react-icons/tb';
 import './App.css'
 
 export default function App() {
@@ -81,9 +82,9 @@ export default function App() {
           </p>
           <ul className="list-disc pl-5 mt-4 space-y-1 text-neutral-800 text-left">
             <li>5 min to beach</li>
-            <li>Private chef on request</li>
-            <li>Infinity pool</li>
-            <li>Sea‑view terrace</li>
+            <li>Fenced private pool</li>
+            <li>Three bedrooms with private bathrooms</li>
+            <li>Welcome drinks and homemade delicacies</li>
           </ul>
         </div>
 
@@ -92,7 +93,7 @@ export default function App() {
           <ImgCard src="/lezaljke.jpg" />
           <ImgCard src="/room.jpg" />
           <ImgCard src="/kitchen.jpg" />
-          <ImgCard src="/table.jpg" />
+          <ImgCard src="/glasses.jpg" />
         </div>
       </section>
 
@@ -119,14 +120,17 @@ export default function App() {
     
             {/* Logo / Intro */}
             <div className="flex gap-4 mt-4 text-neutral-500 text-xl justify-center">
-              <a href="#" aria-label="Facebook" className="hover:text-[#C9911F]">
+              <a href="https://www.instagram.com/_villa__m__?utm_source=qr&igsh=MTVodWt4MnkwcmJzZw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#C9911F]">
                 <FaInstagram />
               </a>
-              <a href="#" aria-label="Instagram" className="hover:text-[#C9911F]">
+              <a href="https://wa.me/38598535263" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="hover:text-[#C9911F]">
+                <FaWhatsapp />
+              </a>
+              <a href="https://hr.airbnb.com/rooms/1407086960356766602?viralityEntryPoint=1&s=76" target="_blank" rel="noopener noreferrer" aria-label="AirBnb" className="hover:text-[#C9911F]">
                 <FaAirbnb />
               </a>
-              <a href="#" aria-label="WhatsApp" className="hover:text-[#C9911F]">
-                <FaWhatsapp />
+              <a href="https://www.booking.com/hotel/hr/villa-m-vodice.hr.html" target="_blank" rel="noopener noreferrer" aria-label="AirBnb" className="hover:text-[#C9911F]">
+                <TbBrandBooking />
               </a>
             </div>
 
