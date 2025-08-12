@@ -8,7 +8,7 @@ let cache = { data: null, ts: 0 };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const manualBlocksPath = path.join(__dirname, '../data/manual-blocks.json');
+const manualBlocksPath = path.join(__dirname, '../data/blocked_dates.json');
 
 export default async function handler(req, res) {
   try {
