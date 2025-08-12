@@ -1,4 +1,4 @@
-const ICAL = require("ical.js");
+import * as ICAL from "ical.js";
 
 /**
  * Simple per-instance in-memory cache.
@@ -9,7 +9,7 @@ let cache = {
   ts: 0,
 };
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const url = process.env.ICAL_LINK;
     if (!url) {
