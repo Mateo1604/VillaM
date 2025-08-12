@@ -1,0 +1,7 @@
+<!-- public/favicon.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Villa M">
+  <!-- gold circle background -->
+  <circle cx="256" cy="256" r="232" fill="#C9911F"></circle>
+  <!-- simple geometric “M” so no fonts are required -->
+  <path d="M150 360V160h42l64 80 64-80h42v200h-42V235l-64 70-64-70v125h-42z" fill="#ffffff"></path>
+</svg>

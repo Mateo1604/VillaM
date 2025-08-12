@@ -35,7 +35,7 @@ export default function Gallery() {
     setCurrentIndex((prev) => (prev === sortedImages.length - 1 ? 0 : prev + 1));
 
 return (
-  <div className="pt-16 px-4 sm:px-6">  {/* 64px = just enough to clear h-14 navbar */}
+  <div className="pt-10 px-4 sm:px-6">  {/* 64px = just enough to clear h-14 navbar */}
     {/* full-bleed breakout */}
     <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-0">
       <div className="px-4 sm:px-6">

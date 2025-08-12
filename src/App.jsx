@@ -1,25 +1,24 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
+import { FaInstagram, FaWhatsapp, FaAirbnb } from "react-icons/fa";
 import './App.css'
 
 export default function App() {
   return (
-    <div className="pt-16">
+    <div className="pt-10">
     <div className="min-h-dvh text-neutral-900">
       {/* ===== TOP OF THE PAGE ===== */}
       <header className="relative isolate overflow-visible">
         <img
-          src="/kuca_naprid.jpg"
+          src="/villa-M-front.jpg"
           alt="Villa M exterior with pool"
-          className="h-[60svh] md:h-[70svh] w-full object-cover"
+          className="h-[60svh] md:h-[70svh] w-full object-cover rounded"
         />
         <div className="pointer-events-none absolute inset-0 rounded-b-3xl ring-1 ring-black/5" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-b-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-b-3xl z-0" />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-serif text-white">Villa M</h1>
           <p className="mt-2 md:mt-3 text-white/90 text-base md:text-lg">
             Dalmatian Coast Luxury Retreat
@@ -30,7 +29,7 @@ export default function App() {
         </div>
 
         {/* ===== FLOATING INFO CARD ===== */}
-        <div className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2 w-[92%] md:w-[80%]">
+        <div className="absolute left-1/2 bottom-0 translate-y-3/4 md:translate-y-1/2 -translate-x-1/2 w-[92%] md:w-[80%]">
           <div className="rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-4 md:p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
               {/* Item */}
@@ -68,7 +67,7 @@ export default function App() {
       </header>
 
       {/* Spacer to account for floating card */}
-      <div className="h-20 md:h-24" />
+      <div className="h-35 md:h-24" />
 
       {/* ===== GALLERY SECTION ===== */}
       <section className="mx-auto w-[92%] md:w-[85%] max-w-6xl grid md:grid-cols-2 gap-8 md:gap-12">
@@ -91,16 +90,16 @@ export default function App() {
         {/* Right grid of images */}
         <div className="grid grid-cols-2 gap-4">
           <ImgCard src="/lezaljke.jpg" />
-          <ImgCard src="/soba.jpg" />
-          <ImgCard src="/kuhinja.jpg" />
-          <ImgCard src="/stol.jpg" />
+          <ImgCard src="/room.jpg" />
+          <ImgCard src="/kitchen.jpg" />
+          <ImgCard src="/table.jpg" />
         </div>
       </section>
 
       {/* ===== EXPERIENCE ===== */}
-      <section className="mx-auto w-[92%] md:w-[85%] max-w-6xl grid md:grid-cols-2 gap-8 md:gap-12 mt-14 md:mt-20">
+      <section className="mx-auto w-[92%] md:w-[85%] max-w-6xl grid md:grid-cols-2 gap-8 md:gap-12 mt-10 md:mt-20">
         <div>
-          <img src="/stol.jpg" alt="Mediterranean breakfast" className="rounded-xl object-cover w-full h-64 md:h-80" />
+          <img src="/table.jpg" alt="Mediterranean breakfast" className="rounded-xl object-cover w-full h-64 md:h-80" />
         </div>
         <div className="flex flex-col justify-center">
           <h2 className="text-2xl md:text-3xl font-semibold mb-4">Experience</h2>
@@ -116,21 +115,57 @@ export default function App() {
 
       {/* ===== FOOTER ===== */}
       <footer className="mx-auto w-[92%] md:w-[85%] max-w-6xl mt-16 md:mt-24 py-10 border-t border-neutral-200">
-        <div className="grid md:grid-cols-5 gap-8">
-          <div className="md:col-span-2">
-            <p className="font-medium">Site name</p>
-            <div className="flex gap-4 mt-4 text-neutral-500">
-              <span className="sr-only">Facebook</span>
-              <span aria-hidden></span>
-              <span className="sr-only">LinkedIn</span>
-              <span aria-hidden></span>
-              <span className="sr-only">Instagram</span>
-              <span aria-hidden></span>
+          <div className="grid md:grid-cols-5 gap-8 text-sm">
+    
+            {/* Logo / Intro */}
+            <div className="flex gap-4 mt-4 text-neutral-500 text-xl justify-center">
+              <a href="#" aria-label="Facebook" className="hover:text-[#C9911F]">
+                <FaInstagram />
+              </a>
+              <a href="#" aria-label="Instagram" className="hover:text-[#C9911F]">
+                <FaAirbnb />
+              </a>
+              <a href="#" aria-label="WhatsApp" className="hover:text-[#C9911F]">
+                <FaWhatsapp />
+              </a>
             </div>
-          </div>
-          <FooterCol title="Topic" />
-          <FooterCol title="Topic" />
-          <FooterCol title="Topic" />
+
+            {/* Quick Links */}
+            <FooterCol
+              title="Quick Links"
+              links={[
+                { text: "Home", href: "/" },
+                { text: "Gallery", href: "/gallery" },
+                { text: "Book Now", href: "/book" },
+              ]}
+            />
+
+            {/* Contact */}
+            <FooterCol
+              title="Contact"
+              links={[
+                { text: "+385 98 535 263", href: "tel:+38598535263" },
+                { text: "villa.m.vodice@gmail.com", href: "mailto:villa.m.vodice@gmail.com" },
+                { text: "Zatonska 95G, Vodice", href: "https://maps.app.goo.gl/vpkoiKtrnErqmwNH9" },
+              ]}
+            />
+
+            {/* Legal */}
+            <div>
+              <p className="font-medium">Legal</p>
+              <ul className="mt-4 space-y-2 text-neutral-600">
+                <li>
+                  <Link to="/privacy-policy" className="hover:underline">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/terms" className="hover:underline">
+                    Terms & Disclaimer
+                  </Link>
+                </li>
+              </ul>
+            </div>
         </div>
       </footer>
 
@@ -159,14 +194,18 @@ function ImgCard({ src, className = "" }) {
   );
 }
 
-function FooterCol({ title }) {
+function FooterCol({ title, links }) {
   return (
     <div>
-      <p className="font-medium">{title}</p>
-      <ul className="mt-4 space-y-2 text-neutral-600">
-        <li>Page</li>
-        <li>Page</li>
-        <li>Page</li>
+      <p className="font-medium mb-3">{title}</p>
+      <ul className="space-y-2 text-neutral-600">
+        {links.map((link, i) => (
+          <li key={i}>
+            <a href={link.href} className="hover:text-[#C9911F] transition">
+              {link.text}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   );

@@ -22,6 +22,9 @@ export default function Navbar() {
           <Link to="/gallery" className={linkClass("/gallery")}>
             Gallery
           </Link>
+          <Link to="/book" className={linkClass("/book")}>
+            Book
+          </Link>
         </div>
       </div>
     </nav>
