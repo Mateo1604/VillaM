@@ -33,17 +33,15 @@ export default async function handler(req, res) {
     if (!r.ok) throw new Error(`ICS fetch failed: ${r.status}`);
     const icsText = await r.text();
 
-    // --- TEMP LOGGING (optional while debugging)
-    console.log(icsText.slice(0, 500));
-
     const bookedDates = parseIcsToBookedDates(icsText);
     const manualBlocks = JSON.parse(fs.readFileSync(manualBlocksPath, 'utf8'));
+    const manualBLocksSet = expandExtras(manualBlocks);
     const mergedBookedDates = Array.from(
-      new Set([...bookedDates, ...expandExtras(manualBlocks)])
+      new Set([...bookedDates, ...manualBLocksSet])
     ).sort();
 
     const payload = {
-      mergedBookedDates,
+      manualBLocksSet,
       lastFetched: new Date().toISOString(),
       ttlMinutes,
     };

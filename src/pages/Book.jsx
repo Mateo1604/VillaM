@@ -14,7 +14,7 @@ export default function Book() {
       try {
         const res = await fetch("/api/availability");
         const data = await res.json();
-        setBooked(new Set(data.bookedDates || []));
+        setBooked(new Set(data.mergedBookedDates || []));
       } catch (e) {
         console.error(e);
       } finally {
