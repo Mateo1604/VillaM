@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     ).sort();
 
     const payload = {
-      manualBLocksSet,
+      mergedBookedDates,
       lastFetched: new Date().toISOString(),
       ttlMinutes,
     };
