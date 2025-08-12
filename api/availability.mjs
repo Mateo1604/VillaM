@@ -1,8 +1,14 @@
 // api/availability.mjs
 import ICAL from "ical.js"; // <-- default import
-import manualBlocks from '../data/blocked_dates.json' assert { type: "json" };
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 let cache = { data: null, ts: 0 };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const manualBlocksPath = path.join(__dirname, '../data/manual-blocks.json');
 
 export default async function handler(req, res) {
   try {
@@ -31,12 +37,13 @@ export default async function handler(req, res) {
     console.log(icsText.slice(0, 500));
 
     const bookedDates = parseIcsToBookedDates(icsText);
+    const manualBlocks = JSON.parse(fs.readFileSync(manualBlocksPath, 'utf8'));
     const mergedBookedDates = Array.from(
       new Set([...bookedDates, ...expandExtras(manualBlocks)])
     ).sort();
 
     const payload = {
-      bookedDates,
+      mergedBookedDates,
       lastFetched: new Date().toISOString(),
       ttlMinutes,
     };
