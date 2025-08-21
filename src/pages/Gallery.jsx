@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import LightboxModal from "../components/LightboxModal";
 
 export default function Gallery() {
@@ -17,7 +16,14 @@ export default function Gallery() {
     .sort((a, b) => a.localeCompare(b));
 
   // State for infinite scroll
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(() => {
+    if (typeof window == "undefined") return 12;
+    const w = window.innerWidth;
+    if (w >= 1024) return 16; // Desktop
+    if (w >= 768) return 12; // Tablet
+    return 10 // Mobile
+  });
+
   const [lightboxImage, setLightboxImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
 
@@ -32,6 +38,29 @@ export default function Gallery() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sortedThumbs.length]);
 
+  // Ensure enough images load to be able to scroll
+  useEffect(() => {
+    let triedExtraLoad = false;
+
+    const ensureScrollable = () => {
+      const scrollable = document.documentElement.scrollHeight > window.innerHeight + 40;
+      if (!scrollable && !triedExtraLoad) {
+        triedExtraLoad = true;
+        setVisibleCount((prev) => {
+          return Math.min(prev + 1, sortedThumbs.length);
+        });
+      }
+    };
+
+    const id = requestAnimationFrame(ensureScrollable);
+    window.addEventListener("resize", ensureScrollable);
+
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("resize", ensureScrollable)
+    }
+  }, [sortedThumbs.length, visibleCount]);
+
   const openLightbox = (index) => setCurrentIndex(index);
   const closeLightbox = () => setCurrentIndex(null);
   const showPrev = () =>
@@ -40,10 +69,10 @@ export default function Gallery() {
     setCurrentIndex((prev) => (prev === sortedImages.length - 1 ? 0 : prev + 1));
 
 return (
-  <div className="pt-10 px-4 sm:px-6">  {/* 64px = just enough to clear h-14 navbar */}
+  <div className="pt-10">  {/* 64px = just enough to clear h-14 navbar */}
     {/* full-bleed breakout */}
-    <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-0">
-      <div className="px-4 sm:px-6">
+    {/* <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-0"> */}
+      <div className="max-w-6x1 mx-auto mt-0">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
           {sortedThumbs.slice(0, visibleCount).map((src, i) => (
             <button
@@ -60,7 +89,6 @@ return (
             </button>
           ))}
         </div>
-      </div>
     </div>
 
     <LightboxModal
