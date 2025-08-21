@@ -4,10 +4,15 @@ import LightboxModal from "../components/LightboxModal";
 
 export default function Gallery() {
   // Load all images from the gallery folder
-  const images = import.meta.glob("../assets/gallery/*.{jpg,jpeg,png,webp}", { eager: true });
+  const images = import.meta.glob("../assets/gallery/full/*.{jpg,jpeg,png,webp}", { eager: true });
+  const thumbs = import.meta.glob("../assets/gallery/thumbs/*.{jpg,jpeg,png,webp}", { eager: true });
 
   // Convert object to array and sort by filename
   const sortedImages = Object.values(images)
+    .map((mod) => mod.default)
+    .sort((a, b) => a.localeCompare(b));
+
+  const sortedThumbs = Object.values(thumbs)
     .map((mod) => mod.default)
     .sort((a, b) => a.localeCompare(b));
 
@@ -20,12 +25,12 @@ export default function Gallery() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-        setVisibleCount((prev) => Math.min(prev + 8, sortedImages.length));
+        setVisibleCount((prev) => Math.min(prev + 8, sortedThumbs.length));
       }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [sortedImages.length]);
+  }, [sortedThumbs.length]);
 
   const openLightbox = (index) => setCurrentIndex(index);
   const closeLightbox = () => setCurrentIndex(null);
@@ -40,7 +45,7 @@ return (
     <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen mt-0">
       <div className="px-4 sm:px-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
-          {sortedImages.slice(0, visibleCount).map((src, i) => (
+          {sortedThumbs.slice(0, visibleCount).map((src, i) => (
             <button
               key={i}
               className="overflow-hidden rounded-lg cursor-pointer group block"

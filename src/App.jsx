@@ -24,9 +24,9 @@ export default function App() {
           <p className="mt-2 md:mt-3 text-white/90 text-base md:text-lg">
             Dalmatian Coast Luxury Retreat
           </p>
-          <button className="mt-5 md:mt-6 rounded-md bg-[#C9911F] px-5 py-2.5 text-white font-medium shadow-md hover:shadow-lg hover:bg-[#b8841c] transition">
+          <Link to="/book" className="mt-5 md:mt-6 rounded-md bg-[#C9911F] px-5 py-2.5 text-white font-medium shadow-md hover:shadow-lg hover:bg-[#b8841c] transition">
             BOOK NOW
-          </button>
+          </Link>
         </div>
 
         {/* ===== FLOATING INFO CARD ===== */}
@@ -72,11 +72,11 @@ export default function App() {
 
       {/* ===== GALLERY SECTION ===== */}
       <section className="mx-auto w-[92%] md:w-[85%] max-w-6xl grid md:grid-cols-2 gap-8 md:gap-12">
-        <div>
+        <div className="flex flex-col justify-center">
           <Link to="/gallery" className="text-2xl md:text-3xl font-semibold mb-4">
                 Gallery
           </Link>
-          <p className="text-neutral-700 leading-relaxed">
+          <p className="text-neutral-700 leading-relaxed mt-4">
             Discover the perfect blend of modern and Mediterranean comfort at Villa M, featuring
             top‑tier amenities and stylish interiors.
           </p>
